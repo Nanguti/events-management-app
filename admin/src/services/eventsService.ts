@@ -1,28 +1,7 @@
 import axios from "axios";
+import { EventInterface } from "../types/EventInterface";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/events`;
-
-export interface EventData {
-  id?: number;
-  title: string;
-  description: string;
-  start_date: string;
-  end_date: string;
-  location: string;
-  organizer_name: string;
-  category: string;
-  registration_link?: string;
-  contact_email?: string;
-  contact_phone?: string;
-  event_image?: string;
-  tags?: string;
-  max_attendees?: number;
-  price?: number;
-  agenda?: string;
-  sponsors?: string;
-  social_links?: string;
-  status?: string;
-}
 
 export const getEvents = async () => {
   try {
@@ -42,7 +21,7 @@ export const getEventById = async (eventId: number) => {
   }
 };
 
-export const createEvent = async (eventData: EventData) => {
+export const createEvent = async (eventData: EventInterface) => {
   try {
     const response = await axios.post(API_URL, eventData);
     return response.data;
@@ -51,7 +30,10 @@ export const createEvent = async (eventData: EventData) => {
   }
 };
 
-export const updateEvent = async (eventId: number, eventData: EventData) => {
+export const updateEvent = async (
+  eventId: number,
+  eventData: EventInterface
+) => {
   try {
     const response = await axios.put(`${API_URL}/${eventId}`, eventData);
     return response.data;

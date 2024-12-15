@@ -3,23 +3,10 @@ import { getEvents } from "../../services/eventsService";
 
 import { NavLink } from "react-router-dom";
 import EventRow from "../../components/Common/EventRow";
-
-interface Event {
-  id: number;
-  title: string;
-  description: string;
-  start_date: string;
-  end_date: string;
-  location: string;
-  image: string;
-  price: number;
-  capacity: number;
-  attendees: string[];
-  status: string;
-}
+import { EventInterface } from "../../types/EventInterface";
 
 const ListEvents: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventInterface[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -38,7 +25,7 @@ const ListEvents: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col mt-8">
+    <div className="flex flex-col">
       <div className="my-4 flex justify-end ">
         <NavLink to="/events/create">
           <button

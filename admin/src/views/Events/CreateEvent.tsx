@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createEvent } from "../../services/eventsService";
+import { EventInterface } from "../../types/EventInterface";
 
 const CreateEvent: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,8 +19,9 @@ const CreateEvent: React.FC = () => {
     registration_link: "",
     tags: "",
     contact_email: "",
+    contact_phone: "",
     sponsors: "",
-    social_links: "",
+    social_links: {} as Record<string, string>, // Initializing social_links as an empty object
   });
 
   const handleInputChange = (
@@ -31,8 +33,31 @@ const CreateEvent: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Omit the `id` from formData
+    const eventData: Omit<EventInterface, "id"> = {
+      title: formData.title,
+      description: formData.description,
+      start_date: formData.start_date,
+      end_date: formData.end_date,
+      location: formData.location,
+      organizer_name: formData.organizer_name,
+      category: formData.category,
+      registration_link: formData.registration_link,
+      contact_email: formData.contact_email,
+      contact_phone: formData.contact_phone,
+      event_image: formData.event_image,
+      tags: formData.tags,
+      max_attendees: formData.max_attendees,
+      price: formData.price,
+      agenda: formData.agenda,
+      sponsors: formData.sponsors,
+      social_links: formData.social_links,
+      status: "scheduled",
+    };
+
     try {
-      await createEvent(formData);
+      await createEvent(eventData); // Pass the eventData to the service without `id`
       alert("Event created successfully!");
       setFormData({
         title: "",
@@ -50,8 +75,9 @@ const CreateEvent: React.FC = () => {
         registration_link: "",
         tags: "",
         contact_email: "",
+        contact_phone: "",
         sponsors: "",
-        social_links: "",
+        social_links: {} as Record<string, string>,
       });
     } catch (error) {
       console.error("Error creating event:", error);

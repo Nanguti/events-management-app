@@ -13,11 +13,21 @@ const DefaultLayout: React.FC = () => {
       </div>
       {/* Content area */}
       <div className="ml-64 flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-1 p-6 bg-gray-100 overflow-auto">
+        {/* Header */}
+        <div className="fixed top-0 left-64 right-0 bg-white shadow-md z-20">
+          <Header />
+        </div>
+
+        {/* Main content */}
+        <main className="flex-1 mt-16 mb-20 p-6 bg-gray-100 overflow-auto">
+          {/* Adjust padding for header/footer space */}
           <Outlet />
         </main>
-        <Footer />
+
+        {/* Footer */}
+        <div className="fixed bottom-0 left-64 right-0 bg-white shadow-md z-20">
+          <Footer />
+        </div>
       </div>
     </div>
   );

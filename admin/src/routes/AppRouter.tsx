@@ -11,6 +11,7 @@ import PendingApprovals from "../views/Approvals/PendingApprovals";
 import NotFound from "../views/NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 import ViewEvent from "../views/Events/ViewEvent";
+import EditEvent from "../views/Events/EditEvent";
 
 const AppRouter: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const AppRouter: React.FC = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/events" element={<ListEvents />} />
           <Route path="/events/:eventId" element={<ViewEvent />} />
+          <Route path="/events/:eventId/edit" element={<EditEvent />} />
           <Route path="/events/create" element={<CreateEvent />} />
           <Route path="/approvals" element={<PendingApprovals />} />
         </Route>

@@ -6,22 +6,10 @@ import {
   ViewfinderCircleIcon,
 } from "@heroicons/react/16/solid";
 import { deleteEvent } from "../../services/eventsService";
-
-interface Event {
-  id: number;
-  title: string;
-  description: string;
-  start_date: string;
-  end_date: string;
-  location: string;
-  price: number;
-  capacity: number;
-  attendees: string[];
-  status: string;
-}
+import { EventInterface } from "../../types/EventInterface";
 
 interface EventRowProps {
-  event: Event;
+  event: EventInterface;
   onEventDeleted?: (id: number) => void;
 }
 
